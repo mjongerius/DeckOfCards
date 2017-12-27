@@ -27,6 +27,7 @@ public class DeckOfCards {
 		Deck deck = null;
 		Card card = null;
 		while (true) {
+			System.console().
 			System.out.println("\nYour command options are: n=new deck, d=deal card, s=shuffle deck, p=print card & deck details, r=reset, x=exit");
 			System.out.print("Please enter single character for your next command: ");
 			
