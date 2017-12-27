@@ -87,7 +87,7 @@ public class Deck {
 		int cardCounter = 1;
 		for (Card card : deck) {
 			if (deckString.length() != 0) {
-				if (!isShuffled && cardCounter > 13) {
+				if (cardCounter > 13) {
 					deckString.append("\n");
 					cardCounter = 1;
 				}
