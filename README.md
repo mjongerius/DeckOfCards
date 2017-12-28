@@ -13,6 +13,8 @@ The deck allows for dealing from the top or the bottom.  The deck also knows abo
 
 My focus for this code challenge was on being thorough when it comes to the requirements rather than being flashy with a lot of graphics.  Although as mentioned before, using the 4 card symbols via Unicode was important to me as it truly facilitates absorbing all the card details.
 
+I also do not believe in making software more complicated than it needs to be.  There can be beauty in simplicity.
+
 ### What I used for development
 I used Eclipse Java Oxygen as my IDE (Version: Oxygen.2 Release 4.7.2, Build id: 20171218-0600).  I changed my Preferences -> Workspace -> Text File Encoding setting to save files in UTF-8 in order to be able to display the four card suits symbols properly: ♥ ♠ ♦ ♣ 
 
