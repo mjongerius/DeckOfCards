@@ -12,7 +12,8 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /*
- * ❤
+ * This test class verifies we can create the 4 suits that make up a deck
+ * and that each suit has 13 unique playing cards
  */
 public class SuitDeckTest {
 
@@ -68,10 +69,11 @@ public class SuitDeckTest {
 	public void testSuitDeckCreationRanksStringLong() {	
 		SuitDeck suitDeck = new SuitDeck(CardSuit.Diamonds);
 		assertEquals(13, suitDeck.getSuiteCards().size());
+		
+		// We'll use a String which we can turn into a list for checking that all 13 playing cards are created
 		String cardRanksString = "ace,two,three,four,five,six,seven,eight,nine,ten,jack,queen,king";
 		
 		String[] rankList = cardRanksString.split(",");
-		
 		for (int x=0; x<rankList.length; x++) {
 			boolean foundRank = false;
 			for (Card card : suitDeck.getSuiteCards()) {
@@ -88,6 +90,8 @@ public class SuitDeckTest {
 	public void testSuitDeckCreationRanksStringShort() {	
 		SuitDeck suitDeck = new SuitDeck(CardSuit.Diamonds);
 		assertEquals(13, suitDeck.getSuiteCards().size());
+		
+		// Test the short version for each rank
 		String cardRanksString = "a,2,3,4,5,6,7,8,9,10,j,q,k";
 		
 		String[] rankList = cardRanksString.split(",");

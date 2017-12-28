@@ -2,6 +2,10 @@ package main.robots.pencils.pojo;
 
 import main.robots.pencils.enumerations.*;
 
+/*
+ * Simple card object for our Deck class which does not concern itself with Jokers, 
+ * just the main 13 playing cards per suit.
+ */
 public class Card {
 
 	private CardRank rank;

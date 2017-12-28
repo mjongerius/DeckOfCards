@@ -15,7 +15,6 @@ import main.robots.pencils.exceptions.*;
  * 
  * Please follow the prompts on the console and try various combinations.
  * 
- * Reading the word "Hearts" is not as efficient as seeing the symbol ❤
  */
 public class DeckOfCards {
 	
@@ -28,8 +27,8 @@ public class DeckOfCards {
 		Deck deck = null;
 		List<Card> cardList = new ArrayList<Card>();
 		while (true) {
-			System.out.println("\nYour command options are: n=new deck, d=deal card, s=shuffle deck, p=print deck & card list details, r=reset, x=exit");
-			System.out.print("Please enter single character for your next command (n, d, s, p, r, x): ");
+			System.out.println("\nYour command options are: n=new deck, s=shuffle deck, dt=deal card from top, db=deal card from bottom, p=print deck & card-list details, r=reset, x=exit");
+			System.out.print("Please enter your next command (n, dt, db, s, p, r, x): ");
 			
 			nextCommand = reader.next().toLowerCase();
 			if (nextCommand == null || nextCommand.length() == 0) {
@@ -60,26 +59,36 @@ public class DeckOfCards {
 				displayDeckCardDetails(deck, cardList);
 				System.out.print(DeckOfCards.BREAKER_LINE);
 			}
-			else if (nextCommand.equalsIgnoreCase("d")) {
+			else if (nextCommand.equalsIgnoreCase("dt")) {
 				if (deck == null) {
 					System.out.println(DeckOfCards.ALERT_NEW_DECK_NEEDED);
 				}
 				else
 				{
-					System.out.println("\n\tYour secondary command options are: t=deal from top (default), b=deal from bottom");
-					System.out.print("\tPlease enter single character for your secondary command: ");
-					nextCommand = reader.next().toLowerCase();
-				
 					try {
-						if (nextCommand.equalsIgnoreCase("b")) {
-							cardList.add(deck.dealFromBottom());
-						}
-						else {
-							cardList.add(deck.dealFromTop());
-						}
+						cardList.add(deck.dealFromTop());
+						
 						System.out.print("\n\nINFO: A card has been dealt and added to the card list\n\n");
 						displayDeckCardDetails(deck, cardList);
-	
+					}
+					catch (EmptyDeckException ede) {
+						System.out.println("\nALERT: There are no cards left in the deck\n"); 
+					}
+					System.out.print(DeckOfCards.BREAKER_LINE);
+				}
+					
+			}
+			else if (nextCommand.equalsIgnoreCase("db")) {
+				if (deck == null) {
+					System.out.println(DeckOfCards.ALERT_NEW_DECK_NEEDED);
+				}
+				else
+				{
+					try {
+						cardList.add(deck.dealFromBottom());
+						
+						System.out.print("\n\nINFO: A card has been dealt and added to the card list\n\n");
+						displayDeckCardDetails(deck, cardList);
 					}
 					catch (EmptyDeckException ede) {
 						System.out.println("\nALERT: There are no cards left in the deck\n"); 

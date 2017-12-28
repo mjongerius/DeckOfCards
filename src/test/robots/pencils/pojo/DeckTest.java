@@ -26,12 +26,11 @@ public class DeckTest {
 		Deck deck = new Deck();
 		assertEquals(52, deck.getNumberOfCards());
 		assertEquals(false, deck.isShuffled());
-		new PrintStream(System.out, true, "UTF-8").println("\u2260");
+		
 		// Just for fun and visual inspection of a brand new deck
 		System.out.println("\nBrand new deck of cards:");
 		new PrintStream(System.out, true, "UTF-8").println(deck.toUnicodeString());
 		System.out.println("\n");
-		new PrintStream(System.out, true, "UTF-8").println("Test: \u2660");
 	}
 
 	/*
@@ -50,8 +49,15 @@ public class DeckTest {
 			}
 		}
 		catch (EmptyDeckException ede) {
-			assertEquals(4, suits.size());
-			System.out.println(suits);
+			assertEquals(0, deck.getNumberOfCards());
+		}
+		// We'll use a String which we can turn into a list for checking that all 4 suits are created
+		String cardSuitsString = "Spades,Hearts,Clubs,Diamonds";
+
+		String[] suitList = cardSuitsString.split(",");
+		for (int x=0; x < suitList.length; x++) {
+			boolean foundSuit = suits.containsKey(suitList[x]);
+			assertEquals("Could not find " + suitList[x] +" in the ranks" , true, foundSuit);
 		}
 	}
 
@@ -68,9 +74,44 @@ public class DeckTest {
 		Assert.assertNotNull("Card is not to be null", card);
 		assertEquals(51, deck.getNumberOfCards());
 
+		System.out.println("\nDetails of the dealt card:");
 		new PrintStream(System.out, true, "UTF-8").println(card.toUnicodeString());
 		new PrintStream(System.out, true, "UTF-8").println(card.toString());
+		System.out.println("\n");
+	}
+	
+	@Test
+	public void testDeckDealFromBottom() throws UnsupportedEncodingException {
+		Deck deck = new Deck();
+		Card card = null;
+		try {
+			card = deck.dealFromBottom();
+		}
+		catch (EmptyDeckException ede) {
+			Assert.fail("Exception is not expected");
+		}
+		Assert.assertNotNull("Card is not to be null", card);
+		assertEquals(51, deck.getNumberOfCards());
 
+		System.out.println("\nDetails of the dealt card:");
+		new PrintStream(System.out, true, "UTF-8").println(card.toUnicodeString());
+		new PrintStream(System.out, true, "UTF-8").println(card.toString());
+		System.out.println("\n");
+	}
+	
+	@Test
+	public void testDeckShuffle() throws UnsupportedEncodingException {
+		Deck deck = new Deck();
+		String unshuffled = deck.toString();
+		
+		deck.shuffle();
+		assertEquals(52, deck.getNumberOfCards());
+		assertEquals(true, deck.isShuffled());
+		assertNotEquals(unshuffled, deck.toString());
+		
+		System.out.println("\nShuffled deck:");
+		new PrintStream(System.out, true, "UTF-8").println(deck.toUnicodeString());
+		System.out.println("\n");
 	}
 
 }
